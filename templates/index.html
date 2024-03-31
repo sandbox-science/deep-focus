@@ -13,6 +13,48 @@
 	on your goals every day.
 	Deep Focus is a great tool for students, professionals, and anyone who wants to be more productive.
 </p>
+
+
+
+
+<h1 class = "study">How long would you like to study for?</h1>
+<script> 
+	const timerInput = document.getElementById('timerInput');
+    const formattedTimeSpan = document.getElementById('formattedTime');
+
+    timerInput.addEventListener('input', function(event) {
+        let input = event.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+        let formattedTime = '';
+
+        // Pad the input with leading zeros if necessary
+        while (input.length < 6) {
+            input = '0' + input;
+        }
+
+        // Format the time
+        formattedTime = input.substring(0, 2) + 'h ' +
+                        input.substring(2, 4) + 'm ' +
+                        input.substring(4, 6) + 's';
+
+        // Update the displayed formatted time
+        formattedTimeSpan.textContent = formattedTime;
+});
+
+
+</script>
+
+<div class = "timer"> 
+	<input style="border:none;  font-size:26px;  width: 170px;" type="number" id="timerInput" placeholder="00h 00m 00s">
+	<span style= " display: none;" id="formattedTime">00h 00m 00s</span>
+
+	<button class = "start"> 
+		<img src="/assets/Play.png">
+	</button>
+	<button class = "stop"> 
+		<img src="/assets/Stop.png"> 
+	</button>
+</div>
+
 <p>
 	Deep Focus is a project by Warrior-Toro CSUDH students.
 </p>
