@@ -65,8 +65,7 @@ button.menubouton {
   font-family: 'GI';
   src: url('/assets/GlacialIndifference-Regular.otf') format('opentype'); 
 }
-body {
-  font-family: 'GI'; 
+.timer .align-body {
   text-align: center;
 }
 .timer {

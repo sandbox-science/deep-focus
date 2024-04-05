@@ -1,7 +1,7 @@
-function setmenu(option) {
-  var host             = window.location.origin;
-  window.location.href = host + option;
-}
+  function setmenu(option) {
+    var host             = window.location.origin;
+    window.location.href = host + option;
+  }
 
 function validatePassword() {
   const password           = document.getElementById('password').value;
