@@ -1,8 +1,28 @@
-function setmenu(option) {
-  var host             = window.location.origin;
-  window.location.href = host + option;
+/* 
+  setmenu() function is used to set menu items dynamically
+  the user to the selected menu option from the frontend.
+*/
+function setMenu(menuItems) {
+  const menuContainer = document.getElementById('menu');
+  menuContainer.innerHTML = ''; // Clear existing menu items
+
+  // Loop through menuItems array and create buttons for each item
+  menuItems.forEach(item => {
+    const button = document.createElement('button');
+    button.classList.add('menu');
+    button.textContent = item.text;
+    button.onclick = () => {
+      window.location.href = item.url;
+    };
+    menuContainer.appendChild(button);
+  });
 }
 
+/*
+  Validate password. Check for at least 8 characters, 
+  one number, one uppercase letter, one lowercase letter, 
+  and that the password matches the confirm password.
+*/
 function validatePassword() {
   const password           = document.getElementById('password').value;
   const confirmPassword    = document.getElementById('confirmPassword').value;

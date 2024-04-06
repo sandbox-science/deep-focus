@@ -9,12 +9,12 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/golang-jwt/jwt/v4" // Import v4 of the JWT library
-	"github.com/sandbox-science/deep-focus/internal/database"
+	"github.com/golang-jwt/jwt/v4"
+	"github.com/sandbox-science/deep-focus/internal/models"
 )
 
 // GenerateToken generates a JWT token for the provided user.
-func GenerateToken(user database.User) (string, error) {
+func GenerateToken(user models.User) (string, error) {
 	tokenLifespan, err := strconv.Atoi(os.Getenv("TOKEN_HOUR_LIFESPAN"))
 	if err != nil {
 		return "", err
@@ -35,26 +35,23 @@ func GenerateToken(user database.User) (string, error) {
 		return "", err
 	}
 
-	// Log the generated token string for debugging
-	fmt.Println("Generated token:", tokenString)
-
 	return tokenString, nil
 }
 
 // ValidateToken validates the JWT token provided in the request headers.
-func ValidateToken(c *gin.Context) error {
+func ValidateToken(c *gin.Context) (jwt.MapClaims, error) {
 	token, err := GetToken(c)
 
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	// Check if token is valid
-	if _, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
-		return nil
+	if user, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+		return user, nil
 	}
 
-	return errors.New("invalid token provided")
+	return nil, errors.New("invalid token provided")
 }
 
 func GetToken(c *gin.Context) (*jwt.Token, error) {
@@ -74,9 +71,9 @@ func GetToken(c *gin.Context) (*jwt.Token, error) {
 	})
 
 	if token.Valid {
-		fmt.Println("Token is valid", token)
+		fmt.Println("Token is valid:", token.Valid)
 	} else {
-		fmt.Println("Token is invalid:  ", err)
+		fmt.Println("Error: Token is invalid:", err)
 	}
 
 	if err != nil {

@@ -8,10 +8,13 @@ import (
 	"github.com/sandbox-science/deep-focus/internal/utils"
 )
 
-// JwtAuthMiddleware checks if the user is authorized
-func JwtAuthMiddleware() gin.HandlerFunc {
+/*
+AuthMiddleware checks if the user is
+authorized to access the protected routes.
+*/
+func AuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		err := utils.ValidateToken(c)
+		user, err := utils.ValidateToken(c)
 
 		if err != nil {
 			c.JSON(http.StatusUnauthorized, gin.H{"Unauthorized": "Authentication required"})
@@ -19,6 +22,7 @@ func JwtAuthMiddleware() gin.HandlerFunc {
 			c.Abort()
 			return
 		}
+		c.Set("user", user)
 		c.Next()
 	}
 }

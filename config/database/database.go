@@ -2,8 +2,8 @@ package database
 
 import (
 	"fmt"
-	"log"
 
+	"github.com/sandbox-science/deep-focus/internal/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -19,19 +19,20 @@ type Config struct {
 
 // InitDB initializes the database connection and performs necessary migrations.
 func InitDB(cfg Config) (*gorm.DB, error) {
-
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s",
 		cfg.Host, cfg.User, cfg.Password, cfg.DBName, cfg.Port, cfg.SSLMode)
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
-		log.Fatal(err.Error())
-	}
-	if err = db.AutoMigrate(&User{}); err != nil {
-		log.Println(err)
+		return nil, err
 	}
 
-	fmt.Println("Migrated database")
+	err = db.AutoMigrate(&models.User{})
+	if err != nil {
+		return nil, err
+	}
 
-	return db, err
+	fmt.Println("Migrated database!")
+
+	return db, nil
 }
