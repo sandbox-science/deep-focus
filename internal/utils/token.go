@@ -35,9 +35,6 @@ func GenerateToken(user database.User) (string, error) {
 		return "", err
 	}
 
-	// Log the generated token string for debugging
-	fmt.Println("Generated token:", tokenString)
-
 	return tokenString, nil
 }
 
@@ -74,7 +71,7 @@ func GetToken(c *gin.Context) (*jwt.Token, error) {
 	})
 
 	if token.Valid {
-		fmt.Println("Token is valid", token)
+		fmt.Println("Token is valid", token.Valid)
 	} else {
 		fmt.Println("Token is invalid:  ", err)
 	}
