@@ -36,6 +36,10 @@ func AuthRoutes(router *gin.Engine, db *gorm.DB) {
 		ctx.HTML(http.StatusOK, "app.html", gin.H{})
 	})
 
+	authorized.GET("/deleteUser", func(ctx *gin.Context) {
+		ctx.HTML(http.StatusOK, "deleteUser.html", gin.H{})
+	})
+
 	authorized.GET("/ping", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"message": "pong",

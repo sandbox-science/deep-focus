@@ -61,6 +61,40 @@ button.menubouton {
   font-size: 16px;
   font-weight: bold;
 }
+@font-face {
+  font-family: 'GI';
+  src: url('/assets/GlacialIndifference-Regular.otf') format('opentype'); 
+}
+.timer .align-body {
+  text-align: center;
+}
+.timer {
+  font-size:30px;
+  padding: 24px 32px;
+  border-radius: 30px;
+  background: white;
+  max-width: 300px; /* Set a maximum width for the timer */
+  margin: 0 auto; /* Center the timer horizontally */
+}
+
+
+.timer button {
+  width: 40px;
+  height: 40px;
+  margin-left: 16px;
+  border-radius: 50%;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+.stop {
+  background: #ff0015;
+}
+
+.start {
+  background: #00b84c;
+}
+
 
 .container {
   padding-top: 15px;
