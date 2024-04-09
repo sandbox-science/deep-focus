@@ -16,6 +16,7 @@ export DB_USER     = "USERNAME"
 export DB_PASSWORD = "PASSWORD"
 export DB_NAME     = "DATABASE_NAME"
 export DB_SSLMODE  = "disable"
+export TOKEN_HOUR_LIFESPAN=1
 ```
 Replace the placeholders for the database [username], [password], [port],[database_name] with your actual values.
 
