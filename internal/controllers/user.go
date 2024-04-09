@@ -78,6 +78,7 @@ func (s *Server) Login(c *gin.Context) {
 	token, err := s.LoginCheck(user.Email, user.Password)
 
 	if err != nil {
+		fmt.Println("\nLogin failed: ", err)
 		c.JSON(http.StatusBadRequest, gin.H{"error": "The email or password is not correct"})
 		return
 	}

@@ -13,11 +13,18 @@ import (
 	"github.com/sandbox-science/deep-focus/internal/models"
 )
 
+type NoToken struct{}
+
+func (m *NoToken) Error() string {
+	return "No token lifespan provided in the environment variables."
+}
+
 // GenerateToken generates a JWT token for the provided user.
 func GenerateToken(user models.User) (string, error) {
+
 	tokenLifespan, err := strconv.Atoi(os.Getenv("TOKEN_HOUR_LIFESPAN"))
 	if err != nil {
-		return "", err
+		return "", &NoToken{}
 	}
 
 	// Set token claims
